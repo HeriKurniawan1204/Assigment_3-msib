@@ -1,29 +1,39 @@
-const myInput = document.getElementById("inputSearch");
-const myBtn = document.getElementById("btnSearch");
+const active = document.querySelector("#aktifCases");
+const newdata = document.querySelector("#newCases");
+const recovered = document.querySelector("#recoverCases");
+const totalCases = document.querySelector("#totalCases");
+const totalDeaths = document.querySelector("#totalDeath");
+const totalTest = document.querySelector("#totalTes");
 
-myBtn.addEventListener("click", function () {
-  const inputCountry = myInput.value;
+const input = document.querySelector("#is");
+const button = document.querySelector("#btnSearch");
 
-  fetch(`https://covid-193.p.rapidapi.com/statistics?country=${inputCountry}`, {
+button.addEventListener("click", async () => {
+  const date = new Date();
+  const today = date.toISOString().slice(0, 10);
+
+  const BASE_URL = `https://covid-193.p.rapidapi.com/history?country=${input.value}&day=${today}`;
+
+  const options = {
     method: "GET",
     headers: {
       "X-RapidAPI-Key": "",
       "X-RapidAPI-Host": "covid-193.p.rapidapi.com",
     },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const statistics = data.response[0];
+  };
 
-      document.getElementById("aktifCases").innerHTML = statistics.cases.active;
-      document.getElementById("newCases").innerHTML = statistics.cases.new;
-      document.getElementById("recoverCases").innerHTML = statistics.cases.recovered;
-      document.getElementById("totalCases").innerHTML = statistics.cases.total;
-      document.getElementById("totalDeath").innerHTML = statistics.deaths.total;
-      document.getElementById("totalTes").innerHTML = statistics.tests.total;
-    })
-    .catch((err) => {
-      console.error(err);
-      alert("Error!");
-    });
+  const response = await fetch(BASE_URL, options);
+  const data = await response.json();
+
+  if (data.response.length) {
+    const dataResponse = data.response[0];
+
+    console.log(dataResponse);
+    active.innerText = dataResponse.cases.active;
+    newdata.innerText = dataResponse.cases.new ? dataResponse.cases.new : 0;
+    recovered.innerText = dataResponse.cases.recovered;
+    totalCases.innerText = dataResponse.cases.total;
+    totalDeaths.innerText = dataResponse.deaths.total;
+    totalTest.innerText = dataResponse.tests.total;
+  }
 });
