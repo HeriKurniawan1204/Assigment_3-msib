@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Covid 19 Tracker</h1>
+      <input type="text" class="form-input placeholder" id="is" placeholder="Input country" />
+      <button class="btn third" id="btnSearch">Get Data</button>
+      <br />
+      <br />
+      <div id="container">
+        <div class="card">
+          <img src="src/assets/images/bacteria.png" />
+          <p>Active Cases</p>
+          <h3 id="aktifCase"></h3>
+        </div>
+        <div class="card">
+          <img src="src/assets/images/regulations.png" />
+          <p>New Cases</p>
+          <h3 id="newCase"></h3>
+        </div>
+        <div class="card">
+          <img src="src/assets/images/recover.png" />
+          <p>Recovered Cases</p>
+          <h3 id="recoverCases"></h3>
+        </div>
+      </div>
+      <div id="container">
+        <div class="card">
+          <img src="src/assets/images/test.png" />
+          <p>Total Cases</p>
+          <h3 id="totalCases"></h3>
+        </div>
+        <div class="card">
+          <img src="src/assets/images/death.png" />
+          <p>Total Death</p>
+          <h3 id="totalDeath"></h3>
+        </div>
+        <div class="card">
+          <img src="src/assets/images/test-results.png" />
+          <p>Total Test</p>
+          <h3 id="totalTes"></h3>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
